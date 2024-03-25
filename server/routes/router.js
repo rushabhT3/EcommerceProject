@@ -1,16 +1,17 @@
+// routes/router.js
 const express = require("express");
 const router = express.Router();
 
+const { signup, login, verify } = require("../controllers/authController");
 const {
-  signup,
-  login,
-  verify,
-  markCategory,
-} = require("./controllers/controller");
+  toggleInterest,
+  getCategories,
+} = require("../controllers/categoryController");
 
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/verify", verify);
-router.post("/mark-category", markCategory);
+router.post("/toggle-interest", toggleInterest);
+router.get("/categories", getCategories);
 
 module.exports = router;

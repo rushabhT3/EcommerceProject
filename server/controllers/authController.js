@@ -32,30 +32,27 @@ const sendEmail = async (email, verificationCode) => {
 
 const signup = async (req, res) => {
   try {
+    console.log("hi");
     const { name, email, password } = req.body;
+    console.log(name, email, password);
+    // // Hash the password
+    // const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // // Generate a verification code
+    // const verificationCode = generateVerificationCode();
 
-    // Generate a verification code
-    const verificationCode = generateVerificationCode();
+    // // Create a new user
+    // const newUser = await User.create({
+    //   name,
+    //   email,
+    //   password: hashedPassword,
+    //   verificationCode,
+    // });
 
-    // Create a new user
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      verificationCode,
-    });
+    // // Send the verification code to the user's email
+    // await sendEmail(newUser.email, verificationCode);
 
-    // Send the verification code to the user's email
-    await sendEmail(newUser.email, verificationCode);
-
-    res
-      .status(201)
-      .send(
-        `Signup successful for ${newUser.name} with email ${newUser.email}!`
-      );
+    res.status(201).send(`Signup successful for ${name} with email ${email}!`);
   } catch (err) {
     res.status(500).send("An error occurred during signup.");
   }
